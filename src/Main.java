@@ -19,29 +19,29 @@ public class Main {
         panel.setBorder(BorderFactory.createEmptyBorder(50,50,30,50));
 
         JLabel title = new JLabel("新幹線管理システムへようこそ");
-        title.setForeground(Color.decode("#012010"));
+        title.setForeground(Color.decode("#012010"));  //
         title.setFont(new Font(null,Font.BOLD,35));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(title,BorderLayout.NORTH);
 
         gridLayout= new GridLayout(6,1);
         table = new JPanel(gridLayout);
-        table.setBackground(Color.decode("#EBFFD8"));
+        table.setBackground(Color.decode("#B3FFFF"));//#EBFFD8
         ArrayList<Trip> trips= new ArrayList<>();
-        for (int i=0;i<4;i++){
-            Trip t= new Trip();
-            t.setArrivalTime("00:00");
-            t.setDepartureTime("00:00");
-            t.setDate("2025-10-02");
-            t.setDestination("Destination");
-            t.setStartStation("Start");
-            Train tr=new Train();
-            tr.setDescription("Train 1 VIP");
+        for (int i = 0; i < 4; i++) {
+            Trip t = new Trip();
+            t.setArrivalTime("00:00"); // 到着時刻
+            t.setDepartureTime("00:00"); // 出発時刻
+            t.setDate("2025-10-02"); // 日付
+            t.setDestination("行き先"); // Destination
+            t.setStartStation("出発駅"); // Start Station
+            Train tr = new Train();
+            tr.setDescription("列車 1 VIP"); // Train 1 VIP
             t.setTrain(tr);
-            t.setPrice(50);
+            t.setPrice(50); // 料金
             trips.add(t);
-
         }
+
         refreshTable(trips);
 
         JScrollPane sp= new JScrollPane(table);
@@ -77,18 +77,19 @@ public class Main {
             deptS=trip.getDepartureTime();
             arrS=trip.getArrivalTime();
             priceS= trip.getPrice()+"$";
-            statusS="Booked";
-            if(trip.getTrain().getCapacity()>trip.getbookedSeats()) statusS="Available";
+            statusS="予約済み";
+            if(trip.getTrain().getCapacity()>trip.getbookedSeats()) statusS="空席";
         }else {
-            trainS="Train";
-            startS="Form";
-            destS="To";
-            dateS="Date";
-            deptS="Dept";
-            arrS="Arr";
-            priceS="Price";
-            statusS="Status";
+            trainS = "列車"; // Train
+            startS = "出発"; // From (Departure)
+            destS = "到着"; // To (Destination)
+            dateS = "日付"; // Date
+            deptS = "出発時刻"; // Dept (Departure Time)
+            arrS = "到着時刻"; // Arr (Arrival Time)
+            priceS = "料金"; // Price
+            statusS = "ステータス"; // Status
         }
+
 
         JLabel train= JLabel(trainS,100);
         row.add(train);
