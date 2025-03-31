@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 
 public class ModifyList {
-    public ModifyList(JFrame oldFrame){
+    public ModifyList(JFrame oldFrame, Database database){
         JFrame frame= new JFrame("新幹線管理システム");
         frame.setSize(400,600);
         frame.getContentPane().setLayout(new BorderLayout());
@@ -28,7 +28,7 @@ public class ModifyList {
         addTrain.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddTrain(oldFrame);
+                new AddTrain(oldFrame, database);
             }
         });
         panel.add(addTrain);

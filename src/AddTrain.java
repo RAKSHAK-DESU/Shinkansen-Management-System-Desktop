@@ -1,9 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import  javax.swing.JButton;
 
 public class AddTrain {
-    public AddTrain(JFrame oldFrame){
+    private Database database;
+
+    public AddTrain(JFrame oldFrame, Database database){
+        this.database= database;
         JFrame frame= new JFrame("Add Train");
         frame.setSize(750,400);
         frame.getContentPane().setLayout(new BorderLayout());
@@ -16,7 +22,7 @@ public class AddTrain {
 
         panel.add(JLabel("ID:"));
 
-        JTextField id= JTextField();
+        JLabel id= JLabel("0");
         panel.add(id);
 
         panel.add(JLabel("Capacity"));
@@ -29,6 +35,7 @@ public class AddTrain {
         String[] drivers= {"Driver 1","Driver 2", "Driver 3", "Driver 4"};
         JComboBox<String> driver = new JComboBox<>(drivers);
         driver.setBackground(Color.white);
+        driver.setFont(new Font(null,Font.BOLD,20));
         panel.add(driver);
 
         panel.add(JLabel("Description:"));
@@ -39,6 +46,23 @@ public class AddTrain {
         panel.add(cancel);
 
         JButton submit = JButton("Submit");
+        submit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Train t = new Train();
+                t.setId(Integer.parseInt(id.getText()));
+                t.setCapacity(Integer.parseInt(capacity.getText()));
+                t.setDescription(description.getText());
+                try {
+                    saveData(t);
+                    JOptionPane.showMessageDialog(frame,"Train Added Successfully");
+                    frame.dispose();
+                } catch (SQLException e1){
+                    JOptionPane.showMessageDialog(frame,"Operation Failed");
+                }
+
+            }
+        });
         panel.add(submit);
 
         frame.getContentPane().add(panel,BorderLayout.CENTER);
@@ -71,5 +95,10 @@ public class AddTrain {
         btn.setFont(new Font(null , Font.BOLD,22));
         return btn;
 
+    }
+    private void saveData(Train t){
+        String insert= "INSERT INTO `trains`(`ID`, `Capacity`, `Description`) VALUES " +
+                "('"+t.getID()+"','"+t.getCapacity()+"','"+t.getDescription()+"')";
+        database.getStatement().execute(insert);
     }
 }

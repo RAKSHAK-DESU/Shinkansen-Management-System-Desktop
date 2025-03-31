@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -10,7 +11,9 @@ public class Main {
     private static JFrame frame;
     private static JPanel table;
     private static GridLayout gridLayout;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+
+        Database database= new Database();
 
         frame = new JFrame("新幹線管理システム");
         frame.setSize(1050,650);
@@ -59,7 +62,7 @@ public class Main {
         modify.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ModifyList(frame);
+                new ModifyList(frame, database);
             }
         });
         panel.add(modify,BorderLayout.SOUTH);
