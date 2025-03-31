@@ -32,7 +32,7 @@ public class Trip {
         return start;
     }
     public void setStartStation(String Start){
-        this.start=start;
+        this.start=Start;
     }
     public String getDestination(){
         return destination;

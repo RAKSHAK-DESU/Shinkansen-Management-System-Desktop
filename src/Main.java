@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -9,14 +11,17 @@ public class Main {
     private static JPanel table;
     private static GridLayout gridLayout;
     public static void main(String[] args) {
+
         frame = new JFrame("新幹線管理システム");
-        frame.setLocationRelativeTo(null);
         frame.setSize(1050,650);
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().setBackground(Color.decode("#B3FFFF"));
+        frame.setLocationRelativeTo(null);
+
         JPanel panel = new JPanel(new BorderLayout(20,20));
         panel.setBackground(null);
-        panel.setBorder(BorderFactory.createEmptyBorder(50,50,30,50));
+        panel.setBorder(BorderFactory.createEmptyBorder(50,40,30,40));
+
 
         JLabel title = new JLabel("新幹線管理システムへようこそ");
         title.setForeground(Color.decode("#012010"));  //
@@ -28,7 +33,7 @@ public class Main {
         table = new JPanel(gridLayout);
         table.setBackground(Color.decode("#B3FFFF"));//#EBFFD8
         ArrayList<Trip> trips= new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 8; i++) {
             Trip t = new Trip();
             t.setArrivalTime("00:00"); // 到着時刻
             t.setDepartureTime("00:00"); // 出発時刻
@@ -46,9 +51,20 @@ public class Main {
 
         JScrollPane sp= new JScrollPane(table);
         panel.add(sp,BorderLayout.CENTER);
+
+        JButton modify = new JButton("Modify");
+        modify.setBackground(Color.decode("#45C4B0"));
+        modify.setForeground(Color.white);
+        modify.setFont(new Font(null,Font.BOLD,22));
+        modify.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ModifyList(frame);
+            }
+        });
+        panel.add(modify,BorderLayout.SOUTH);
+
         frame.add(panel,BorderLayout.CENTER);
-
-
         frame.setVisible(true);
     }
     private static void refreshTable(ArrayList<Trip> trips){
@@ -79,6 +95,7 @@ public class Main {
             priceS= trip.getPrice()+"$";
             statusS="予約済み";
             if(trip.getTrain().getCapacity()>trip.getbookedSeats()) statusS="空席";
+            row.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }else {
             trainS = "列車"; // Train
             startS = "出発"; // From (Departure)
@@ -109,7 +126,7 @@ public class Main {
         JLabel arrTime= JLabel(arrS,65);
         row.add(arrTime);
 
-        JLabel price = JLabel(priceS,50);
+        JLabel price = JLabel(priceS,60);
         row.add(price);
 
 
