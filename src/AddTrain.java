@@ -20,14 +20,14 @@ public class AddTrain {
         panel.setBackground(null);
         panel.setBorder(BorderFactory.createEmptyBorder(30,30,30,30));
 
-        panel.add(JLabel("ID:"));
+        panel.add( new JLabel("ID:"));
 
-        JLabel id= JLabel("0");
+        JLabel id=new JLabel("0");
         panel.add(id);
 
-        panel.add(JLabel("Capacity"));
+        panel.add(new JLabel("Capacity"));
 
-        JTextField capacity = JTextField();
+        JTextField capacity =new JTextField();
         panel.add(capacity);
 
         panel.add(JLabel("Driver"));
@@ -55,11 +55,11 @@ public class AddTrain {
                 t.setDescription(description.getText());
                 try {
                     saveData(t);
-                    JOptionPane.showMessageDialog(frame,"Train Added Successfully");
-                    frame.dispose();
-                } catch (SQLException e1){
-                    JOptionPane.showMessageDialog(frame,"Operation Failed");
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
                 }
+                JOptionPane.showMessageDialog(frame,"Train Added Successfully");
+                frame.dispose();
 
             }
         });
@@ -96,9 +96,9 @@ public class AddTrain {
         return btn;
 
     }
-    private void saveData(Train t){
-        String insert= "INSERT INTO `trains`(`ID`, `Capacity`, `Description`) VALUES " +
-                "('"+t.getID()+"','"+t.getCapacity()+"','"+t.getDescription()+"')";
+    private void saveData(Train t) throws Exception{
+        String insert ="INSERT INTO `trains`(`ID`,`Capacity`,`Description`)VALUES"
+                +"('"+t.getID()+"','"+t.getCapacity()+"','"+t.getDescription()+"');";
         database.getStatement().execute(insert);
     }
 }
