@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/Fullstack Backend.iml" filepath="$PROJECT_DIR$/.idea/Fullstack Backend.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/SHINKANSEN MANAGEMENT SYSTEM.iml" filepath="$PROJECT_DIR$/SHINKANSEN MANAGEMENT SYSTEM.iml" />
+>>>>>>> d9a6d6cf7daf142d5bcb52a406b546601aff1983
     </modules>
   </component>
 </project>
