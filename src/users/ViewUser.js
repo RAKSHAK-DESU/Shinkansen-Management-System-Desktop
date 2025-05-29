@@ -24,29 +24,29 @@ export default function ViewUser() {
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">User Details</h2>
+          <h2 className="text-center m-4">列車の詳細</h2>
 
           <div className="card">
             <div className="card-header">
               Details of user id : {user.id}
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
-                  <b>Name:</b>
+                  <b>新幹線ID : </b>
                   {user.name}
                 </li>
                 <li className="list-group-item">
-                  <b>UserName:</b>
+                  <b>オペレーター名 : </b>
                   {user.username}
                 </li>
                 <li className="list-group-item">
-                  <b>Email:</b>
+                  <b>経路 : </b>
                   {user.email}
                 </li>
               </ul>
             </div>
           </div>
           <Link className="btn btn-primary my-2" to={"/"}>
-            Back to Home
+           	戻る
           </Link>
         </div>
       </div>
